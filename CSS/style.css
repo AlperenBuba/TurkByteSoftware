@@ -166,6 +166,7 @@ body::after
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 50px;
     padding: 60px 40px;
+    padding-bottom: 200px;
 }
 
 .popular-softwares > a {
@@ -242,4 +243,37 @@ body::after
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+}
+
+.price
+{
+    position: relative;
+    color: white;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    bottom: 25px;
+}
+
+.content1
+{
+    background: linear-gradient(to bottom, #51ffffb7, rgba(29, 234, 241, 0.144) 15px);
+    width: 100%;
+    min-height: 130px;
+    padding-top: 90px;
+}
+
+.footer
+{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 50px;
+    background: linear-gradient(to top, #51ffffb7, black 200%);
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
