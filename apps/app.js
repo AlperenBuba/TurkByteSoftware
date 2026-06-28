@@ -54,6 +54,6 @@ const zamanlayici2 = setInterval(() => {
 
 if (discover_button) {
     discover_button.addEventListener("click", function(){
-        window.location.href = "/sites/softwares.html";
+        window.location.href = "~/sites/softwares.html";
     });
 }
