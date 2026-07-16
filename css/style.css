@@ -264,6 +264,102 @@ body::after
     padding-top: 90px;
 }
 
+.software-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px;
+    padding-bottom: 200px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.detail-logo {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 30px rgba(81, 255, 255, 0.3));
+}
+
+.detail-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.detail-desc {
+    font-size: 18px;
+    color: #ccc;
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.download-button {
+    align-items: center;
+    display: inline-flex;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(77, 221, 231, 0.2), rgba(77, 221, 231, 0.05));
+    color: #ffffff;
+    border: 1px solid rgba(77, 221, 231, 0.6);
+    padding: 16px 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.download-button:hover {
+    background: rgba(77, 221, 231, 0.25);
+    border-color: rgba(77, 221, 231, 1);
+    box-shadow: 0 0 25px rgba(77, 221, 231, 0.4);
+    transform: translateY(-3px);
+}
+
+.download-icon {
+    width: 24px;
+    height: 24px;
+    stroke: rgba(77, 221, 231, 1);
+    fill: none;
+}
+
+.detail-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 50px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.detail-info-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(77, 221, 231, 0.15);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.detail-info-item .label {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-info-item .value {
+    font-size: 22px;
+    font-weight: bold;
+    color: #51ffff;
+}
+
 .footer
 {
     position:absolute;
