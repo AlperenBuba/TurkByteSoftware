@@ -3,10 +3,16 @@ let text0 = document.getElementById("aciklama-text");
 let text1 = document.getElementById("text-1");
 let text2 = document.getElementById("text-2");
 
-// Yazılacak yazılar
-yazi0 = ["H", "e", "r", " ", "t", "ü", "r", "d", "e", "n", " ", "y", "a", "z", "ı", "l", "ı", "m"];
-yazi1 = ["S", "O", "F", "T", "W", "A", "R", "E"];
-yazi2 = ["G", "İ", "Z", "L", "i", "L", "İ", "K"];
+// Yazılacak yazılar (dil dosyasından)
+if (typeof t !== "undefined" && t.typing_home) {
+    yazi0 = t.typing_home;
+    yazi1 = t.typing_software;
+    yazi2 = t.typing_privacy;
+} else {
+    yazi0 = ["H", "e", "r", " ", "t", "ü", "r", "d", "e", "n", " ", "y", "a", "z", "ı", "l", "ı", "m"];
+    yazi1 = ["S", "O", "F", "T", "W", "A", "R", "E"];
+    yazi2 = ["G", "İ", "Z", "L", "i", "L", "İ", "K"];
+}
 
 // Butonlar
 let discover_button = document.getElementById("discover-button");
