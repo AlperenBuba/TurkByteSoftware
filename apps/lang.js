@@ -1,4 +1,9 @@
-var lang = (navigator.language || navigator.userLanguage || "tr").startsWith("tr") ? "tr" : "en";
+var urlLang = new URLSearchParams(window.location.search).get("lang");
+var storedLang = localStorage.getItem("lang");
+var browserLang = (navigator.language || navigator.userLanguage || "tr").startsWith("tr") ? "tr" : "en";
+var lang = urlLang || storedLang || browserLang;
+
+localStorage.setItem("lang", lang);
 
 var translations = {
     tr: {
@@ -23,94 +28,94 @@ var translations = {
 
 var t = translations[lang];
 
+function switchLang(newLang) {
+    localStorage.setItem("lang", newLang);
+    var url = new URL(window.location.href);
+    url.searchParams.set("lang", newLang);
+    window.location.href = url.toString();
+}
+
 function applyTranslations() {
-    document.querySelectorAll("[data-lang]").forEach(function(el) {
-        var key = el.getAttribute("data-lang");
-        if (t[key] !== undefined) {
-            if (key === "footer_contact" || key === "footer_copyright") {
-                el.innerHTML = t[key];
-            } else {
-                el.textContent = t[key];
+    if (lang === "tr") return;
+
+    document.querySelectorAll(".navigation-button").forEach(function(el) {
+        var txt = el.textContent.trim();
+        if (txt === "Anasayfa") el.textContent = "Home Page";
+    });
+
+    var discoverBtn = document.getElementById("discover-button");
+    if (discoverBtn) {
+        discoverBtn.childNodes.forEach(function(node) {
+            if (node.nodeType === 3 && node.textContent.trim()) {
+                node.textContent = "Discover More ";
             }
+        });
+    }
+
+    document.querySelectorAll(".detail-info-item .label").forEach(function(el) {
+        var map = {"S\u00FCr\u00FCm":"Version","Fiyat":"Price","Platform":"Platform","Boyut":"Size"};
+        if (map[el.textContent.trim()]) el.textContent = map[el.textContent.trim()];
+    });
+    document.querySelectorAll(".detail-info-item .value").forEach(function(el) {
+        if (el.textContent.trim() === "\u00DCcretsiz") el.textContent = "Free";
+    });
+
+    document.querySelectorAll(".platform-msg").forEach(function(el) {
+        var html = el.innerHTML;
+        el.innerHTML = html.replace("Windows destekliyor", "Supports Windows").replace("Android destekliyor", "Supports Android");
+    });
+
+    var descMap = {};
+    descMap[translations.tr.aht_desc] = translations.en.aht_desc;
+    descMap[translations.tr.tepegoz_desc] = translations.en.tepegoz_desc;
+    descMap[translations.tr.ctree_desc] = translations.en.ctree_desc;
+    descMap[translations.tr.calculator_desc] = translations.en.calculator_desc;
+    document.querySelectorAll(".detail-desc").forEach(function(el) {
+        if (descMap[el.textContent.trim()]) el.textContent = descMap[el.textContent.trim()];
+    });
+
+    document.querySelectorAll(".download-button").forEach(function(el) {
+        el.childNodes.forEach(function(node) {
+            if (node.nodeType === 3) {
+                var txt = node.textContent.trim();
+                if (txt === "Apk \u0130ndir") node.textContent = "Download APK";
+                else if (txt === "\u0130ndir") node.textContent = "Download";
+            }
+        });
+    });
+
+    var footer = document.querySelector(".footer");
+    if (footer) {
+        var divs = footer.querySelectorAll("div");
+        divs.forEach(function(d) {
+            var html = d.innerHTML;
+            if (html.indexOf("E-posta:") !== -1) d.innerHTML = html.replace("E-posta:", "Email:");
+            if (html.indexOf("Gizlilik Politikas\u0131") !== -1) d.innerHTML = html.replace("Gizlilik Politikas\u0131", "Privacy Policy");
+        });
+    }
+}
+
+function addLangSwitcher() {
+    if (document.querySelector(".lang-switcher")) return;
+    var div = document.createElement("div");
+    div.className = "lang-switcher";
+    div.innerHTML = `
+        <div class="lang-options">
+            <div class="lang-option" onclick="switchLang('tr')">TR</div>
+            <div class="lang-option" onclick="switchLang('en')">EN</div>
+        </div>
+        <div class="lang-current" onclick="this.parentElement.classList.toggle('open')">${lang.toUpperCase()}</div>
+    `;
+    document.body.appendChild(div);
+
+    document.addEventListener("click", function(e) {
+        if (!div.contains(e.target)) {
+            div.classList.remove("open");
         }
     });
 }
 
-if (lang === "en") {
-    document.addEventListener("DOMContentLoaded", function() {
-        // Nav
-        var navLinks = document.querySelectorAll(".navigation-button");
-        navLinks.forEach(function(el) {
-            if (el.textContent.trim() === "Anasayfa" || el.textContent.trim() === "Home Page") el.textContent = "Home Page";
-        });
-        // Discover button
-        var discoverBtn = document.getElementById("discover-button");
-        if (discoverBtn) {
-            discoverBtn.childNodes.forEach(function(node) {
-                if (node.nodeType === 3 && node.textContent.trim()) {
-                    node.textContent = "Discover More ";
-                }
-            });
-        }
-        // Popular header
-        var headers = document.querySelectorAll(".header");
-        headers.forEach(function(h) {
-            if (h.textContent.trim() === "Popular Softwares") h.textContent = "Popular Softwares";
-        });
-        // Detail labels
-        document.querySelectorAll(".detail-info-item .label").forEach(function(el) {
-            var map = {"S\u00FCr\u00FCm":"Version","Fiyat":"Price","Platform":"Platform","Boyut":"Size"};
-            if (map[el.textContent.trim()]) el.textContent = map[el.textContent.trim()];
-        });
-        document.querySelectorAll(".detail-info-item .value").forEach(function(el) {
-            if (el.textContent.trim() === "\u00DCcretsiz") el.textContent = "Free";
-        });
-        // Platform messages
-        document.querySelectorAll(".platform-msg").forEach(function(el) {
-            var txt = el.textContent.trim();
-            if (txt === "Windows destekliyor") el.innerHTML = el.innerHTML.replace("Windows destekliyor", "Supports Windows");
-            if (txt === "Android destekliyor") el.innerHTML = el.innerHTML.replace("Android destekliyor", "Supports Android");
-        });
-        // Footer
-        var footer = document.querySelector(".footer");
-        if (footer) {
-            var contactDiv = footer.querySelector("div");
-            if (contactDiv) {
-                var contactHtml = contactDiv.innerHTML;
-                if (contactHtml.indexOf("E-posta:") !== -1) {
-                    contactDiv.innerHTML = contactHtml.replace("E-posta:", "Email:");
-                }
-                var copyrightDiv = contactDiv.nextElementSibling;
-                if (copyrightDiv && copyrightDiv.innerHTML.indexOf("Gizlilik Politikas\u0131") !== -1) {
-                    copyrightDiv.innerHTML = copyrightDiv.innerHTML.replace("Gizlilik Politikas\u0131", "Privacy Policy");
-                }
-            }
-        }
-        // Description texts
-        var descMap = {};
-        descMap[translations.tr.aht_desc] = translations.en.aht_desc;
-        descMap[translations.tr.tepegoz_desc] = translations.en.tepegoz_desc;
-        descMap[translations.tr.ctree_desc] = translations.en.ctree_desc;
-        descMap[translations.tr.calculator_desc] = translations.en.calculator_desc;
-        document.querySelectorAll(".detail-desc").forEach(function(el) {
-            if (descMap[el.textContent.trim()]) el.textContent = descMap[el.textContent.trim()];
-        });
-        // "Apk \u0130ndir" -> "Download APK"
-        document.querySelectorAll(".download-button").forEach(function(el) {
-            var txt = el.textContent.trim();
-            if (txt === "Apk \u0130ndir") {
-                el.childNodes.forEach(function(node) {
-                    if (node.nodeType === 3 && node.textContent.trim() === "Apk \u0130ndir") {
-                        node.textContent = "Download APK";
-                    }
-                });
-            } else if (txt === "\u0130ndir") {
-                el.childNodes.forEach(function(node) {
-                    if (node.nodeType === 3 && node.textContent.trim() === "\u0130ndir") {
-                        node.textContent = "Download";
-                    }
-                });
-            }
-        });
-    });
-}
+document.addEventListener("DOMContentLoaded", function() {
+    applyTranslations();
+    addLangSwitcher();
+});
