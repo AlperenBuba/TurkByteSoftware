@@ -525,6 +525,7 @@ body::after
     .lang-switcher {
         bottom: auto !important;
         top: 20px;
+        flex-direction: column-reverse !important;
     }
     .content,
     .content1 {
@@ -597,6 +598,7 @@ body::after
     }
     .lang-switcher {
         top: 10px !important;
+        flex-direction: column-reverse !important;
     }
     .aciklama {
         font-size: 22px !important;
