@@ -23,7 +23,7 @@ let k = 0;
 
 if (text0) text0.textContent = "";
 if (text1) text1.textContent = "";
-if (text2) text1.textContent = "";
+if (text2) text2.textContent = "";
 
 const zamanlayici0 = setInterval(() => {
     if (i < yazi0.length) {

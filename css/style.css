@@ -483,6 +483,153 @@ body::after
     transform: scale(1.1);
 }
 
+@media (max-width: 768px) {
+    .menus {
+        height: auto !important;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px 0;
+    }
+    .menus > div:first-child {
+        width: 100%;
+        text-align: center;
+        position: static !important;
+    }
+    .menus > div:last-child {
+        position: static !important;
+        width: 100%;
+        text-align: center !important;
+        right: auto !important;
+        left: auto !important;
+    }
+    .logo {
+        margin-left: 0 !important;
+        font-size: 30px !important;
+        line-height: 50px;
+    }
+    .navigation {
+        line-height: 40px;
+        display: inline !important;
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        list-style: none;
+    }
+    .navigation li {
+        display: inline !important;
+    }
+    .navigation-button {
+        font-size: 28px !important;
+        margin: 0 30px !important;
+    }
+    .lang-switcher {
+        bottom: auto !important;
+        top: 20px;
+    }
+    .content,
+    .content1 {
+        padding-top: 50px !important;
+    }
+    .content1 {
+        min-height: 100px !important;
+    }
+    .aciklama {
+        font-size: 28px !important;
+    }
+    .popular-softwares {
+        padding: 30px 20px 150px !important;
+        gap: 30px !important;
+    }
+    .software-card {
+        width: 240px !important;
+        height: 320px !important;
+        transform: none !important;
+    }
+    .software-card:hover {
+        transform: translateY(-10px) !important;
+    }
+    .card-header {
+        font-size: 18px !important;
+    }
+    .card-image-content {
+        height: 200px !important;
+    }
+    .card-image-content .card-image {
+        max-width: 120px !important;
+    }
+    .price {
+        font-size: 22px !important;
+        bottom: 0 !important;
+    }
+    .detail-logo {
+        width: 200px !important;
+        height: 200px !important;
+    }
+    .detail-title {
+        font-size: 28px !important;
+    }
+    .detail-desc {
+        font-size: 15px !important;
+        padding: 0 20px;
+    }
+    .button-group {
+        flex-direction: column;
+        gap: 12px !important;
+    }
+    .detail-info {
+        grid-template-columns: 1fr !important;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    .footer div {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 24px !important;
+    }
+    .navigation-button {
+        font-size: 24px !important;
+        margin: 0 22px !important;
+    }
+    .lang-switcher {
+        top: 10px !important;
+    }
+    .aciklama {
+        font-size: 22px !important;
+    }
+    .header {
+        margin-left: 20px !important;
+        font-size: 18px;
+    }
+    .software-card {
+        width: 200px !important;
+        height: 260px !important;
+    }
+    .card-header {
+        font-size: 16px !important;
+    }
+    .card-image-content {
+        height: 160px !important;
+    }
+    .card-image-content .card-image {
+        max-width: 100px !important;
+    }
+    .price {
+        font-size: 18px !important;
+        bottom: 0 !important;
+    }
+    .detail-title {
+        font-size: 22px !important;
+    }
+    .detail-desc {
+        font-size: 14px !important;
+    }
+}
+
 .footer
 {
     position:absolute;
